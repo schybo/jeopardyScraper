@@ -17,11 +17,12 @@ showUrls = [show["content"] for show in shows]
 # for showUrl in showUrls:
 # 	print showUrl;
 
-url = showUrls[1];
+url = showUrls[2];
 newPage = urllib2.urlopen(url);
 newSoup = BeautifulSoup(newPage);
 
-thirdUrls = newSoup.find_all('a')
-newUrls = [url for url in thirdUrls if 'buttonlink' in url]
+thirdUrls = newSoup.find_all(lambda tag: tag.name == 'a' and 
+                                   tag.get('class') == ['buttonlink'])
 
-print newUrls
+for thirdUrl in thirdUrls:
+	print thirdUrl;
