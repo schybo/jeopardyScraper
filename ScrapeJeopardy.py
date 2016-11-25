@@ -17,12 +17,24 @@ showUrls = [show["content"] for show in shows]
 # for showUrl in showUrls:
 # 	print showUrl;
 
-url = showUrls[2];
-newPage = urllib2.urlopen(url);
-newSoup = BeautifulSoup(newPage);
+secondUrl = showUrls[2];
+secondPage = urllib2.urlopen(secondUrl);
+secondSoup = BeautifulSoup(secondPage);
 
-thirdUrls = newSoup.find_all(lambda tag: tag.name == 'a' and 
+secondPageUrls = secondSoup.find_all(lambda tag: tag.name == 'a' and 
                                    tag.get('class') == ['buttonlink'])
 
-for thirdUrl in thirdUrls:
-	print thirdUrl;
+thirdUrl = secondPageUrls[1]['href'];
+
+print thirdUrl
+
+thirdPage = urllib2.urlopen(thirdUrl);
+thirdSoup = BeautifulSoup(thirdPage);
+
+thirdPageUrls = thirdSoup.find_all(href=True)
+
+for thirdPageUrl in thirdPageUrls:
+	print thirdPageUrl['href'];
+
+# http://onwatchseries.to/cale.html?r=aHR0cDovL2dvcmlsbGF2aWQuaW4vNzVucncxamdhaWp5
+# http://onwatchseries.to/cale.html?r=aHR0cDovL2dvcmlsbGF2aWQuaW4vNzVucncxamdhaWp5
